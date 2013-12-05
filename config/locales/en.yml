@@ -9,11 +9,11 @@ en:
   empty: "Empty"
   hello: "Hello world"
   item:
-  	count:
-  		one: "1 item"
-  		other: "%{count} items"
-  	new: "New Item"
-  	not_found: "Item not found"
+    count:
+      one: "1 item"
+      other: "%{count} items"
+    new: "New Item"
+    not_found: "Item not found"
   item_: "Item"
   quantity: "Quantity"
   price: "Price"
