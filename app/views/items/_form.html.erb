@@ -1,0 +1,18 @@
+<%= form_for @item, url: items_path do |f| %>
+
+	<%= t(:reference) %>
+	<%= f.text_field :ref %>
+
+	<%= t(:title) %>
+	<%= f.text_field :title %>
+
+	<%= t(:price) %>
+	<%= f.text_field :price %>
+
+	<%= t(:details) %>
+	<%= f.text_field :details %>
+
+  <%= link_to t(:cancel), root_path %>
+  <%= f.submit t(:submit) %>
+
+<% end %>

@@ -1,0 +1,22 @@
+<table>
+	<thead>
+		<th><%= t(:item_) %></th>
+		<th><%= t(:price) %></th>
+		<th><%= t(:quantity) %></th>
+		<th><%= t(:total) %></th>
+	</thead>
+	<% @cart.cart_rows.each do |row| %>
+		<tr>
+			<td><%= row.item_title %></td>
+			<td><%= row.item_price %></td>
+			<td><%= row.quantity %></td>
+			<td><%= row.total %></td>
+		</tr>
+	<% end %>
+</table>
+<div>
+	<%= "#{t(:total)}: #{@cart.total}" %>
+</div>
+<div>
+	<%= link_to t(:continue_shopping), root_path %>
+</div>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Shopping</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+	<div id="header">
+		<%= link_to t(:your_cart), show_cart_path(@cart.id) %>
+		<% if @cart.count == 0 %>
+			<%= t(:empty) %>
+		<% else %>
+			<%#= t('item.count', count: @cart.count) %>
+			<%= @cart.count %>
+		<% end %>
+	</div>
+	<%= yield %>
+
+</body>
+</html>
