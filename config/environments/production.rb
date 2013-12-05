@@ -62,3 +62,5 @@ Shopping::Application.configure do
   config.active_support.deprecation = :notify
 
 end
+
+MONGOHQ_URL = "mongodb://chris2tof:aaliyah@paulo.mongohq.com:10039/app20101704"

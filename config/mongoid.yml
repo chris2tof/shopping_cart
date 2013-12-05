@@ -11,5 +11,6 @@ test:
   database: shopping_test
 
 production:
-  <<: *defaults
-  database: shopping_prod
+  # <<: *defaults
+  # database: shopping_prod
+  uri: <%= ENV['MONGOHQ_URL'] %>
