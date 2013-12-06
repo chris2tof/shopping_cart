@@ -9,7 +9,13 @@ class Cart
   end
 
   def total
-  	self.cart_rows.present? ? self.cart_rows.inject(0){|sum, row| sum + row.total} : 0
+  	total = self.cart_rows.present? ? self.cart_rows.inject(0){|sum, row| sum + row.total} : 0
+  	promotions = Promotion.where(on: 'cart')
+  	percentage = promotions.inject(0) do |percentage, promotion|
+  		percentage = promotion.percentage if (promotion.price <= total && promotion.percentage > percentage)
+  		percentage
+  	end
+  	(total - total * percentage / 100).round(2)
   end
 
 end

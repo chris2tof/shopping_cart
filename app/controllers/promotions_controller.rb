@@ -10,8 +10,8 @@ class PromotionsController < ApplicationController
 	end
 
 	def create
-		item = Item.find(params[:item_id]) rescue nil
-		if item
+		if params[:promotion][:on].eql?("item_")
+			item = Item.find(params[:item_id]) rescue nil
 			@promotion = item.promotions.build(params[:promotion])
 		else
 			@promotion = Promotion.new(params[:promotion])

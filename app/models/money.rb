@@ -6,7 +6,7 @@ class Money
   end
   
   def serialize(object)
-    object ? ((BigDecimal.new(object.to_s)).round(2) * 100).to_i : object
+    object ? (BigDecimal.new(object.to_s).round(2) * 100).to_i : object
   end
   
 end
