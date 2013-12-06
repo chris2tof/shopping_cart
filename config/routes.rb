@@ -64,6 +64,8 @@ Shopping::Application.routes.draw do
     end
   end
 
+  resources :promotions
+
   root :to => 'items#index'
 
 end

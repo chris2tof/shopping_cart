@@ -8,15 +8,15 @@
 </head>
 <body>
 	<div id="header">
+		<%= link_to t(:home), root_path %>
 		<%= link_to t(:your_cart), show_cart_path(@cart.id) %>
+		<%= link_to t(:promotions), promotions_path %>
 		<% if @cart.count == 0 %>
 			<%= t(:empty) %>
 		<% else %>
-			<%#= t('item.count', count: @cart.count) %>
-			<%= @cart.count %>
+			<%= t('item.count', count: @cart.count) %>
 		<% end %>
 	</div>
 	<%= yield %>
-
 </body>
 </html>

@@ -4,10 +4,12 @@
 en:
   add_to_cart: "Add to cart"
   cancel: "Cancel"
+  cart: "Cart"
   continue_shopping: "Continue shopping"
   details: "Details"
   empty: "Empty"
   hello: "Hello world"
+  home: "Home"
   item:
     count:
       one: "1 item"
@@ -17,6 +19,9 @@ en:
   item_: "Item"
   quantity: "Quantity"
   price: "Price"
+  promotion:
+    new: "New promotion"
+  promotions: "Promotions"
   reference: "Reference"
   submit: "Submit"
   title: "Title"

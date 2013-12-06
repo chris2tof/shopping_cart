@@ -1,0 +1,7 @@
+<ul>
+	<% @promotions.each do |promotion| %>
+		<li><%= link_to promotion.title, promotion_path(promotion) %></li>
+	<% end %>
+</ul>
+
+<%= link_to t('promotion.new'), new_promotion_path %>

@@ -8,5 +8,6 @@ class Item
   field :title, localize: true
 
   has_many :cart_rows
+  has_many :promotions, as: :discountable, dependent: :destroy
 
 end

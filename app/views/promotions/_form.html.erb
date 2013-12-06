@@ -1,0 +1,40 @@
+<%= form_for @promotion, url: promotions_path do |f| %>
+
+	<%= t(:reference) %>
+	<%= f.text_field :ref %>
+
+	<%= t(:title) %>
+	<%= f.text_field :title %>
+
+	<span id="target_type">
+		<%= t(:target) %>
+		<%= f.select :on, Promotion::TARGETS.map{|target| [t(target), target]} %>
+	</span>
+
+	<span id="cart" class="target_type">
+		<%= t(:price) %>
+		<%= f.text_field :price %>
+		<%= t(:percentage) %>
+		<%= f.text_field :percentage %>
+	</span>
+
+	<span id="item_"class="target_type" style="display:none">
+		<%= t(:item_) %>
+		<%= select_tag :item_id, options_from_collection_for_select(@items, 'id', 'title') %>
+		<%= t(:quantity) %>
+		<%= f.text_field :quantity %>
+		<%= t(:new_price) %>
+		<%= f.text_field :new_price %>
+	</span>
+
+  <%= link_to t(:cancel), promotions_path %>
+  <%= f.submit t(:submit) %>
+
+<% end %>
+
+<script>
+	$(document).on('change', '#target_type select', function()
+	{
+		$('.target_type').toggle();
+	});
+</script>
