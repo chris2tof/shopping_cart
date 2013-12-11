@@ -1,7 +1,26 @@
-<ul>
-	<% @promotions.each do |promotion| %>
-		<li><%= link_to promotion.title, promotion_path(promotion) %></li>
-	<% end %>
-</ul>
+<div class="page-header">
+  <h1><%= t(:promotions) %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= t(:reference) %></th>
+      <th><%= t(:title) %></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @promotions.each do |promotion| %>
+      <tr>
+        <td><%= promotion.ref %></td>
+        <td><%= link_to promotion.title, promotion_path(promotion) %></td>
+        <td>
+          <%= link_to t(:edit_), edit_promotion_path(promotion), class: 'btn btn-mini' %>
+          <%= link_to t(:destroy_), promotion_path(promotion), method: :delete, data: { confirm: t(:confirm) }, class: 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
-<%= link_to t('promotion.new'), new_promotion_path %>
+<%= link_to t('promotion.new'), new_promotion_path, class: 'btn btn-primary' %>

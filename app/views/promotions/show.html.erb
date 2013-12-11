@@ -1,0 +1,16 @@
+<div class="page-header">
+  <h1><%= @promotion.title %></h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt><strong><%= t(:reference) %>:</strong></dt>
+  <dd><%= @promotion.ref %></dd>
+  <dt><strong><%= t(:details) %>:</strong></dt>
+  <dd><%= @promotion.details %></dd>
+</dl>
+
+<div class="form-actions">
+  <%= link_to t(:back), promotions_path, class: 'btn'  %>
+  <%= link_to t(:edit_), edit_promotion_path(@promotion), class: 'btn' %>
+  <%= link_to t(:destroy_), promotion_path(@promotion), method: 'delete', data: { confirm: t(:confirm) }, class: 'btn btn-danger' %>
+</div>

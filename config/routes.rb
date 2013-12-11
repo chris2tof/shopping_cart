@@ -56,7 +56,10 @@ Shopping::Application.routes.draw do
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
 
-  match 'cart' => 'carts#show', as: 'show_cart'
+  get 'cart', to: 'carts#show', as: 'cart'
+  delete 'cart_row/:id' => 'cart_rows#destroy', as: 'cart_row'
+  post 'decrease_cart_row/:id' => 'cart_rows#decrease', as: 'decrease_cart_row'
+  post 'increase_cart_row/:id' => 'cart_rows#increase', as: 'increase_cart_row'
 
   resources :items do
     member do

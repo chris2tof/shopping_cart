@@ -1,18 +1,19 @@
-<%= t(:reference) %>
-<%= @item.ref %>
-
-<%= t(:title) %>
-<%= @item.title %>
-
-<%= t(:price) %>
-<%= @item.price %>
-
-<%= t(:details) %>
-<%= @item.details %>
-
-<div>
-	<%= link_to t(:add_to_cart), add_to_cart_item_path(@item), method: 'post' %>
+<div class="page-header">
+  <h1><%= @item.title %></h1>
 </div>
-<div>
-	<%= link_to t(:continue_shopping), root_path %>
+
+<dl class="dl-horizontal">
+  <dt><strong><%= t(:reference) %>:</strong></dt>
+  <dd><%= @item.ref %></dd>
+  <dt><strong><%= t(:price) %>:</strong></dt>
+  <dd><%= @item.price %></dd>
+  <dt><strong><%= t(:details) %>:</strong></dt>
+  <dd><%= @item.details %></dd>
+</dl>
+
+<div class="form-actions">
+  <%= link_to t(:back), items_path, class: 'btn'  %>
+  <%= link_to t(:add_to_cart), add_to_cart_item_path(@item), method: 'post', class: 'btn btn-success' %>
+  <%= link_to t(:edit_), edit_item_path(@item), class: 'btn' %>
+  <%= link_to t(:destroy_), item_path(@item), method: 'delete', data: { confirm: t(:confirm) }, class: 'btn btn-danger' %>
 </div>

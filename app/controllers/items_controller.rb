@@ -1,13 +1,13 @@
 class ItemsController < ApplicationController
 	
 	def index
-		@items = Item.all
+		@items = Item.all.order_by([:ref, :asc])
 	end
 
 	def show
 		@item = Item.find(params[:id]) rescue nil
 		unless @item
-			redirect_to items_url, error: t('item.not_found')
+			redirect_to items_url, error: t(:not_found, object: "Item")
 		end
 	end
 
@@ -24,6 +24,37 @@ class ItemsController < ApplicationController
 		end
 	end
 
+	def edit
+		@item = Item.find(params[:id]) rescue nil
+		unless @item
+			redirect_to items_url, error: t(:not_found, object: "Item")
+		end
+	end
+
+	def update
+		@item = Item.find(params[:id]) rescue nil
+		if @item
+			if @item.update_attributes(params[:item])
+				redirect_to items_url
+			else
+				@item = Item.new(params[:item])
+				render :edit
+			end
+		else
+			redirect_to items_url, error: t(:not_found, object: "Item")
+		end
+	end
+
+	def destroy
+		item = Item.find(params[:id]) rescue nil
+		if item
+			item.destroy
+			redirect_to items_url
+		else
+			redirect_to items_url, error: t(:not_found, object: "Item")
+		end
+	end
+
 	def add_to_cart
 		item = Item.find(params[:id]) rescue nil
 		if item
@@ -33,9 +64,9 @@ class ItemsController < ApplicationController
 			else
 				@cart.cart_rows.create(item_id: item.id, quantity: 1)
 			end
-			redirect_to show_cart_url(@cart.id)
+			redirect_to cart_url(@cart.id)
 		else
-			redirect_to items_url, error: t('item.not_found')
+			redirect_to items_url, error: t(:not_found, object: "Item")
 		end
 	end
 

@@ -1,22 +1,49 @@
-<table>
-	<thead>
-		<th><%= t(:item_) %></th>
-		<th><%= t(:price) %></th>
-		<th><%= t(:quantity) %></th>
-		<th><%= t(:total) %></th>
-	</thead>
-	<% @cart.cart_rows.each do |row| %>
-		<tr>
-			<td><%= row.item_title %></td>
-			<td><%= row.price %></td>
-			<td><%= row.quantity %></td>
-			<td><%= row.total %></td>
+<div class="page-header">
+  <h1><%= t(:your_cart).titleize %></h1>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= t(:item_) %></th>
+      <th><%= t(:price) %></th>
+      <th><%= t(:quantity) %></th>
+			<th><%= t(:total) %></th>
+      <th class="span1"></th>
+    </tr>
+  </thead>
+  <tbody>
+  	<% @cart.cart_rows.each do |row| %>
+			<tr>
+				<td><%= row.item_title %></td>
+				<td><%= row.price %></td>
+				<td>
+					<%= row.quantity %>
+					<%= link_to content_tag(:i, nil, class: 'icon-arrow-down'), decrease_cart_row_path(row), method: 'post' %>
+					<%= link_to content_tag(:i, nil, class: 'icon-arrow-up'), increase_cart_row_path(row), method: 'post' %>
+				</td>
+				<td><%= row.total %></td>
+	      <td>
+	        <%= link_to t(:remove), cart_row_path(row), method: :delete, class: 'btn btn-mini btn-danger' %>
+	      </td>
+			</tr>
+		<% end %>
+  </tbody>
+  <tfoot>
+  	<tr>
+  		<td colspan=5>
+  			<dl class="dl-horizontal pull-right">
+				  <dt><strong><%= t(:total) %>:</strong></dt>
+				  <dd><%= @cart.total %></dd>
+				</dl>
+			</td>
 		</tr>
-	<% end %>
+		<tr>
+			<td colspan=5>
+				<div class="pull-right">
+					<%= link_to t(:continue_shopping), root_path, class: 'btn btn-success' %>
+				</div>
+  		</td>
+  	</tr>
+  </tfoot>
 </table>
-<div>
-	<%= "#{t(:total)}: #{@cart.total}" %>
-</div>
-<div>
-	<%= link_to t(:continue_shopping), root_path %>
-</div>
