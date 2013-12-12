@@ -10,3 +10,5 @@ http://chris2tof-shopping-cart.herokuapp.com
 2. Add admin and user roles
 3. Add categories, filters, search
 4. Improve UI
+5. Add complexity to the promotion system
+6. Add currency
