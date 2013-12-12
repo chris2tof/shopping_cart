@@ -2,6 +2,7 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
+  _locale: "English"
   add_to_cart: "Add to cart"
   back: "Back"
   cancel: "Cancel"
@@ -11,8 +12,6 @@ en:
   details: "Details"
   destroy_: "Destroy"
   edit_: "Edit"
-  empty: "Empty"
-  hello: "Hello world"
   home: "Home"
   item:
     count:
@@ -20,7 +19,7 @@ en:
       one: "1 item"
       other: "%{count} items"
     edit: "Edit item"
-    new: "New Item"
+    new: "New item"
   item_: "Item"
   items: "Items"
   quantity: "Quantity"
@@ -37,3 +36,6 @@ en:
   title: "Title"
   total: "Total"
   your_cart: "Your shopping cart"
+
+  en: "English"
+  fr: "French"

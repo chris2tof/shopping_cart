@@ -7,7 +7,7 @@ class ItemsController < ApplicationController
 	def show
 		@item = Item.find(params[:id]) rescue nil
 		unless @item
-			redirect_to items_url, error: t(:not_found, object: "Item")
+			redirect_to items_url, error: t(:not_found, object: t(:item))
 		end
 	end
 
@@ -27,7 +27,7 @@ class ItemsController < ApplicationController
 	def edit
 		@item = Item.find(params[:id]) rescue nil
 		unless @item
-			redirect_to items_url, error: t(:not_found, object: "Item")
+			redirect_to items_url, error: t(:not_found, object: t(:item))
 		end
 	end
 
@@ -41,7 +41,7 @@ class ItemsController < ApplicationController
 				render :edit
 			end
 		else
-			redirect_to items_url, error: t(:not_found, object: "Item")
+			redirect_to items_url, error: t(:not_found, object: t(:item))
 		end
 	end
 
@@ -51,7 +51,7 @@ class ItemsController < ApplicationController
 			item.destroy
 			redirect_to items_url
 		else
-			redirect_to items_url, error: t(:not_found, object: "Item")
+			redirect_to items_url, error: t(:not_found, object: t(:item))
 		end
 	end
 
@@ -66,7 +66,7 @@ class ItemsController < ApplicationController
 			end
 			redirect_to cart_url(@cart.id)
 		else
-			redirect_to items_url, error: t(:not_found, object: "Item")
+			redirect_to items_url, error: t(:not_found, object: t(:item))
 		end
 	end
 

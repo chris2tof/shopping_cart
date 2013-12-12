@@ -7,7 +7,7 @@ class PromotionsController < ApplicationController
 	def show
 		@promotion = Promotion.find(params[:id]) rescue nil
 		unless @promotion
-			redirect_to items_url, error: t(:not_found, object: "Promotion")
+			redirect_to items_url, error: t(:not_found, object: t(:promotion))
 		end
 	end
 
@@ -33,7 +33,7 @@ class PromotionsController < ApplicationController
 	def edit
 		@promotion = Promotion.find(params[:id]) rescue nil
 		unless @promotion
-			redirect_to promotions_url, error: t(:not_found, object: "Promotion")
+			redirect_to promotions_url, error: t(:not_found, object: t(:promotion))
 		end
 		@items = Item.all
 	end
@@ -48,7 +48,7 @@ class PromotionsController < ApplicationController
 				render :edit
 			end
 		else
-			redirect_to promotions_url, error: t(:not_found, object: "Promotion")
+			redirect_to promotions_url, error: t(:not_found, object: t(:promotion))
 		end
 	end
 
@@ -58,7 +58,7 @@ class PromotionsController < ApplicationController
 			promotion.destroy
 			redirect_to promotions_url
 		else
-			redirect_to promotions_url, error: t(:not_found, object: "Promotion")
+			redirect_to promotions_url, error: t(:not_found, object: t(:promotion))
 		end
 	end
 

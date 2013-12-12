@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
   <title><%= t(:shopping_cart).titleize %></title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
@@ -10,6 +11,16 @@
 	<div class="navbar nav-bar-fixed-top">
 	  <div class="navbar-inner">
 	  	<div class="container">
+				<ul class="nav pull-right">
+					<li class="dropdown">
+						<%= link_to content_tag(:i, nil, class: "icon-flag"), '#', class: 'dropdown-toggle', data: { toggle: 'dropdown' } %>
+						<ul class="dropdown-menu" role="menu">
+							<% @ordered_locales.each do |locale| %>
+								<%= content_tag :li, (link_to t(:_locale, locale: locale), add_locale(remove_locale(request.original_url), locale)), class: ('active' if locale.eql?(I18n.locale.to_s)) %></li>
+							<% end %>
+						</ul>
+					</li>
+		  	</ul>
 	  		<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
@@ -24,7 +35,7 @@
 			      	<%= link_to "#{t(:your_cart)} (#{t('item.count', count: @cart.count)})", cart_path(@cart.id) %>
 			      </li>
 			    </ul>
-			   </div>
+			  </div>
 		  </div>
 	  </div>
 	</div>

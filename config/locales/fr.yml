@@ -1,0 +1,41 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+fr:
+  _locale: "Français"
+  add_to_cart: "Ajouter au panier"
+  back: "Retour"
+  cancel: "Annuler"
+  cart: "Panier"
+  confirm: "Êtes-vous sûr ?"
+  continue_shopping: "Poursuivre vos achats"
+  details: "Détails"
+  destroy_: "Supprimer"
+  edit_: "Modifier"
+  home: "Accueil"
+  item:
+    count:
+      zero: "vide"
+      one: "1 article"
+      other: "%{count} articles"
+    edit: "Modification d'article"
+    new: "Nouvel article"
+  item_: "Article"
+  items: "Articles"
+  quantity: "Quantité"
+  not_found: "%{object} non trouvé"
+  price: "Prix"
+  promotion:
+    edit: "Modification de promotion"
+    new: "Nouvelle promotion"
+  promotions: "Promotions"
+  reference: "Référence"
+  remove: "Supprimer"
+  shopping_cart: "Panier"
+  submit: "Valider"
+  title: "Titre"
+  total: "Total"
+  your_cart: "Votre panier"
+
+  en: "Anglais"
+  fr: "Français"

@@ -67,3 +67,5 @@ module Shopping
     config.assets.version = '1.0'
   end
 end
+
+VALID_LOCALES = %w[en fr]

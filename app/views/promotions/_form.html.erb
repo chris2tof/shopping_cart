@@ -1,61 +1,83 @@
 <%= form_for @promotion, html: { class: 'form-horizontal' } do |f| %>
-  <div class="control-group">
-    <%= f.label :ref, t(:reference), class: 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :ref %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :title, t(:title), class: 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :title %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :on, t(:target), class: 'control-label' %>
-    <div id="target_type" class="controls">
-      <%= f.select :on, Promotion::TARGETS.map{|target| [t(target), target]} %>
-    </div>
-  </div>
-  <div id="cart" class="target_type" style="display:<%= @promotion.new_record? ? '' : (@promotion.on.eql?('cart') ? '' : 'none') %>">
+  <!-- Language Tabs -->
+  <ul class="nav nav-pills language-nav">
+    <% @ordered_locales.each_with_index do |locale, i| %>
+      <li class="<%= 'active' if i == 0 %>">
+        <a data-toggle="tab" href=".<%= locale %>"><%= t(locale) %></a>
+      </li>
+    <% end %>
+  </ul>
+  <div class="tab-content language-area">
     <div class="control-group">
-      <%= f.label :price, t(:price), class: 'control-label' %>
+      <%= f.label :ref, t(:reference), class: 'control-label' %>
       <div class="controls">
-        <%= f.text_field :price %>
+        <%= f.text_field :ref %>
       </div>
     </div>
+    <% @ordered_locales.each_with_index do |locale, i| %>
+      <div class="<%= locale %> tab-pane fade <%= ( i == 0 ) ? "in active" : '' %>">
+        <div class="control-group">
+          <%= f.fields_for :title_translations do |f| %>
+            <%= f.label locale, t(:title), class: 'control-label' %>
+            <div class="controls">
+              <%= f.text_field locale, value: (@promotion.title_translations[locale] rescue nil) %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
     <div class="control-group">
-      <%= f.label :percentage, t(:percentage), class: 'control-label' %>
-      <div class="controls">
-        <%= f.text_field :percentage %>
+      <%= f.label :on, t(:target), class: 'control-label' %>
+      <div id="target_type" class="controls">
+        <%= f.select :on, Promotion::TARGETS.map{|target| [t(target), target]} %>
       </div>
     </div>
-  </div>
-  <div id="item_" class="target_type" style="display:<%= @promotion.new_record? ? 'none' : (@promotion.on.eql?('item_') ? '' : 'none') %>">
-    <div class="control-group">
-      <%= f.label :item_id, t(:item_), class: 'control-label' %>
-      <div class="controls">
-        <%= select_tag :item_id, options_from_collection_for_select(@items, 'id', 'title') %>
+    <div id="cart" class="target_type" style="display:<%= @promotion.new_record? ? '' : (@promotion.on.eql?('cart') ? '' : 'none') %>">
+      <div class="control-group">
+        <%= f.label :price, t(:price), class: 'control-label' %>
+        <div class="controls">
+          <%= f.text_field :price %>
+        </div>
+      </div>
+      <div class="control-group">
+        <%= f.label :percentage, t(:percentage), class: 'control-label' %>
+        <div class="controls">
+          <%= f.text_field :percentage %>
+        </div>
       </div>
     </div>
-    <div class="control-group">
-      <%= f.label :quantity, t(:quantity), class: 'control-label' %>
-      <div class="controls">
-        <%= f.text_field :quantity %>
+    <div id="item_" class="target_type" style="display:<%= @promotion.new_record? ? 'none' : (@promotion.on.eql?('item_') ? '' : 'none') %>">
+      <div class="control-group">
+        <%= f.label :item_id, t(:item_), class: 'control-label' %>
+        <div class="controls">
+          <%= select_tag :item_id, options_from_collection_for_select(@items, 'id', 'title') %>
+        </div>
+      </div>
+      <div class="control-group">
+        <%= f.label :quantity, t(:quantity), class: 'control-label' %>
+        <div class="controls">
+          <%= f.text_field :quantity %>
+        </div>
+      </div>
+      <div class="control-group">
+        <%= f.label :new_price, t(:new_price), class: 'control-label' %>
+        <div class="controls">
+          <%= f.text_field :new_price %>
+        </div>
       </div>
     </div>
-    <div class="control-group">
-      <%= f.label :new_price, t(:new_price), class: 'control-label' %>
-      <div class="controls">
-        <%= f.text_field :new_price %>
+    <% @ordered_locales.each_with_index do |locale, i| %>
+      <div class="<%= locale %> tab-pane fade <%= ( i == 0 ) ? "in active" : '' %>">
+        <div class="control-group">
+          <%= f.fields_for :details_translations do |f| %>
+            <%= f.label locale, t(:details), class: 'control-label' %>
+            <div class="controls">
+              <%= f.text_area locale, rows: 5, value: (@promotion.details_translations[locale] rescue nil) %>
+            </div>
+          <% end %>
+        </div>
       </div>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :details, t(:details), class: 'control-label' %>
-    <div class="controls">
-      <%= f.text_area :details, rows: 5 %>
-    </div>
+    <% end %>
   </div>
   <div class="form-actions">
     <%= f.submit t(:submit), class: 'btn btn-primary' %>

@@ -1,31 +1,53 @@
 <%= form_for @item, html: { class: 'form-horizontal' } do |f| %>
-  <div class="control-group">
-    <%= f.label :ref, t(:reference), class: 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :ref, class: "input-large" %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :title, t(:title), class: 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :title, class: "input-large" %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :price, t(:price), class: 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :price, class: "input-large" %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :details, t(:details), class: 'control-label' %>
-    <div class="controls">
-      <%= f.text_area :details, rows: 5, class: "input-xlarge" %>
-    </div>
-  </div>
+  <!-- Language Tabs -->
+  <ul class="nav nav-pills language-nav">
+    <% @ordered_locales.each_with_index do |locale, i| %>
+      <li class="<%= 'active' if i == 0 %>">
+        <a data-toggle="tab" href=".<%= locale %>"><%= t(locale) %></a>
+      </li>
+    <% end %>
+  </ul>
 
-  <div class="form-actions">
-    <%= f.submit t(:submit), class: 'btn btn-primary' %>
-    <%= link_to t(:cancel), items_path, class: 'btn' %>
+  <div class="tab-content language-area">
+    <div class="control-group">
+      <%= f.label :ref, t(:reference), class: 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :ref, class: "input-large" %>
+      </div>
+    </div>
+    <% @ordered_locales.each_with_index do |locale, i| %>
+      <div class="<%= locale %> tab-pane fade <%= ( i == 0 ) ? "in active" : '' %>">
+        <div class="control-group">
+          <%= f.fields_for :title_translations do |f| %>
+            <%= f.label locale, t(:title), class: 'control-label' %>
+            <div class="controls">
+              <%= f.text_field locale, class: "input-large", value: (@item.title_translations[locale] rescue nil) %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+    <div class="control-group">
+      <%= f.label :price, t(:price), class: 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :price, class: "input-large" %>
+      </div>
+    </div>
+    <% @ordered_locales.each_with_index do |locale, i| %>
+      <div class="<%= locale %> tab-pane fade <%= ( i == 0 ) ? "in active" : '' %>">
+        <div class="control-group">
+          <%= f.fields_for :details_translations do |f| %>
+            <%= f.label locale, t(:details), class: 'control-label' %>
+            <div class="controls">
+              <%= f.text_area locale, rows: 5, class: "input-xlarge", value: (@item.details_translations[locale] rescue nil) %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
   </div>
+    <div class="form-actions">
+      <%= f.submit t(:submit), class: 'btn btn-primary' %>
+      <%= link_to t(:cancel), items_path, class: 'btn' %>
+    </div>
 <% end %>
